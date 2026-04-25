@@ -1,0 +1,57 @@
+// Warehouse.java
+import java.util.Scanner;
+
+public class Warehouse {
+    public static void main(String[] args) {
+        Inventory inventory = new Inventory();
+        Scanner scanner = new Scanner(System.in);
+        boolean running = true;
+
+        while (running) {
+            System.out.println("\n--- Warehouse Inventory Menu ---");
+            System.out.println("1. Add Item");
+            System.out.println("2. Remove Item");
+            System.out.println("3. Update Quantity");
+            System.out.println("4. Search Item (ID or Name)");
+            System.out.println("5. Display All Items");
+            System.out.println("6. Exit");
+            System.out.print("Choose an option: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter ID: "); String id = scanner.nextLine();
+                    System.out.print("Enter Name: "); String name = scanner.nextLine();
+                    System.out.print("Enter Qty: "); int qty = scanner.nextInt();
+                    System.out.print("Enter Price: "); double price = scanner.nextDouble();
+                    inventory.addItem(new Item(id, name, qty, price));
+                    break;
+                case 2:
+                    System.out.print("Enter ID to remove: ");
+                    inventory.removeItem(scanner.nextLine());
+                    break;
+                case 3:
+                    System.out.print("Enter ID: "); String upId = scanner.nextLine();
+                    System.out.print("Enter new Qty: "); int newQty = scanner.nextInt();
+                    inventory.updateQuantity(upId, newQty);
+                    break;
+                case 4:
+                    System.out.print("Enter ID or Name to search: ");
+                    inventory.searchItem(scanner.nextLine());
+                    break;
+                case 5:
+                    inventory.displayAll();
+                    break;
+                case 6:
+                    running = false;
+                    System.out.println("Exiting system.");
+                    break;
+                default:
+                    System.out.println("Invalid option.");
+            }
+        }
+        scanner.close();
+    }
+}
